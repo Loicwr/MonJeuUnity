@@ -5342,6 +5342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 250
+  jumpForce: 300
+  isJumping: 0
   rb: {fileID: 1514841196}
 --- !u!212 &1514841198
 SpriteRenderer:

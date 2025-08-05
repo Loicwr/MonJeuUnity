@@ -1879,7 +1879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1514841194}
   timeOffSet: 0.2
-  posOffSet: {x: 0, y: 0, z: -10}
+  posOffSet: {x: 1.12, y: 1.24, z: -10}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

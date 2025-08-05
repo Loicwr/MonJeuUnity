@@ -6,8 +6,10 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
 
 
-    private bool isJumping;
-    private bool isGrounded;
+    public bool isJumping;
+    public bool isGrounded;
+
+    
 
 
     public Transform groundCheckLeft;
@@ -17,6 +19,15 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     private Vector3 velocity = Vector3.zero;
 
+
+        void Update()
+    {
+        // Est ce que ya une demande de saut
+        if (Input.GetButtonDown("Jump") && isGrounded == true)
+        {
+            isJumping = true;
+        }
+    }
 
     // Calculer vitesse de mouvement
     void FixedUpdate()
@@ -28,10 +39,6 @@ public class PlayerMovement : MonoBehaviour
         float horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
 
         // Est ce que ya une demande de saut
-        if (Input.GetButtonDown("Jump") && isGrounded == true)
-        {
-            isJumping = true;
-        }
 
         // Effectuer le mouvement
         MovePlayer(horizontalMovement);

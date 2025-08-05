@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isJumping;
     public bool isGrounded;
 
-    
+
 
 
     public Transform groundCheckLeft;
@@ -17,10 +18,13 @@ public class PlayerMovement : MonoBehaviour
 
 
     public Rigidbody2D rb;
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
+
     private Vector3 velocity = Vector3.zero;
 
 
-        void Update()
+    void Update()
     {
         // Est ce que ya une demande de saut
         if (Input.GetButtonDown("Jump") && isGrounded == true)
@@ -38,10 +42,17 @@ public class PlayerMovement : MonoBehaviour
         // Calculer vitesse de mouvement horizontal
         float horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
 
-        // Est ce que ya une demande de saut
-
         // Effectuer le mouvement
         MovePlayer(horizontalMovement);
+
+        // appelle a flip pour retourner l'info de la direction du personnage (valeur positive , négative)
+        Flip(rb.linearVelocity.x);
+
+        // Garder vitesse positive quand je recule  (toujours renvoyé une vitesse positive)
+        float characterVelocity = Mathf.Abs(rb.linearVelocity.x);
+
+        // envoyer la vitesse a mon animator
+        animator.SetFloat("Speed", characterVelocity);
 
     }
 
@@ -55,6 +66,18 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(new Vector2(0f, jumpForce));
             isJumping = false;
+        }
+    }
+
+    void Flip(float _velocity)
+    {
+        if (_velocity > 0.1f)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (_velocity < -0.1f)
+        {
+            spriteRenderer.flipX = true;
         }
     }
 }

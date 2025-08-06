@@ -1,16 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Slider slider;
+
+    // sert a initialiser la barre de vie
+    public void SetMaxHealth(int health)
     {
-        
+        slider.maxValue = health;
+        slider.value = health;
     }
 
-    // Update is called once per frame
-    void Update()
+    // Sert a indiquer le nombre de point de vie a afficher ( dégat ou soins )
+    public void SetHealth(int health)
     {
-        
+        slider.value = health;
     }
 }

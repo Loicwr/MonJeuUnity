@@ -6,6 +6,8 @@ public class EnnemiPatrol : MonoBehaviour
     public float speed;
     public Transform[] waypoint;
 
+    public int damageOnCollision = 20;
+
     public SpriteRenderer graphics;
     private Transform target;
     private int desPoint = 0;
@@ -38,7 +40,7 @@ public class EnnemiPatrol : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             PlayerHealth playerHealth = collision.transform.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(20);
+            playerHealth.TakeDamage(damageOnCollision);
         }
     }
 

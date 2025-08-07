@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadSpecificScene : MonoBehaviour
 {
-    public void OnTriggerEnter2D(Collider other)
+    public string sceneName;
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }

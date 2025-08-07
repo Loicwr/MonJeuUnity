@@ -1,4 +1,3 @@
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,14 +6,14 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
 
 
-    public bool isJumping;
-    public bool isGrounded;
+    private bool isJumping;
+    private bool isGrounded;
 
 
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    public LayerMask collisionLayers;
 
-
-    public Transform groundCheckLeft;
-    public Transform groundCheckRight;
 
 
     public Rigidbody2D rb;
@@ -22,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     private Vector3 velocity = Vector3.zero;
-
+    private float horizontalMovement;
 
     void Update()
     {
@@ -31,30 +30,25 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = true;
         }
-    }
 
-    // Calculer vitesse de mouvement
-    void FixedUpdate()
-    {
-        // il crée une boite de collision entre les deux éléments, si sa entre en contacte avec quelque chose renvoie true 
-        isGrounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position);
-
-        // Calculer vitesse de mouvement horizontal
-        float horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-
-        // Effectuer le mouvement
-        MovePlayer(horizontalMovement);
-
-        // appelle a flip pour retourner l'info de la direction du personnage (valeur positive , négative)
         Flip(rb.linearVelocity.x);
 
-        // Garder vitesse positive quand je recule  (toujours renvoyé une vitesse positive)
+        // envoie la vitesse horizontal
         float characterVelocity = Mathf.Abs(rb.linearVelocity.x);
-
-        // envoyer la vitesse a mon animator
-        animator.SetFloat("Speed", characterVelocity);
-
+        animator.SetFloat("Speed", rb.linearVelocity.x);
     }
+
+       
+        void FixedUpdate()
+         {
+        // il crée une boite de collision
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
+
+        // Calculer vitesse de mouvement horizontal
+        horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        // Effectuer le mouvement
+        MovePlayer(horizontalMovement);
+          }
 
     void MovePlayer(float _horizontalMovement)
     {
@@ -71,13 +65,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Flip(float _velocity)
     {
-        if (_velocity > 0.1f)
+        if (_velocity > 0.1f) 
         {
             spriteRenderer.flipX = false;
-        }
-        else if (_velocity < -0.1f)
+        } 
+        else if(_velocity < -0.1f) 
         {
             spriteRenderer.flipX = true;
         }
+    }
+    private void OnDrawGizmos()
+    {
+        // Dessine le cercle de vérification du sol
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 }

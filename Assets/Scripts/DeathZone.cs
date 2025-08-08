@@ -19,7 +19,7 @@ public class DeathZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            StartCoroutine(ReplacePlayer());
+            StartCoroutine(ReplacePlayer(collision));
         }
     }
 

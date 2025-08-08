@@ -4637,10 +4637,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerSpawn
       objectReference: {fileID: 0}
-    - target: {fileID: 2567787125617837273, guid: 9282f6a50aab52d48b35d3ecf1ed89e8, type: 3}
-      propertyPath: m_TagString
-      value: PlayerSpawn
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17074,11 +17070,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7822648399687063029, guid: a83fd3a565d8a454c9a01b8982198eb7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -43.43
+      value: -43.58
       objectReference: {fileID: 0}
     - target: {fileID: 7822648399687063029, guid: a83fd3a565d8a454c9a01b8982198eb7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.85
+      value: -4.33
       objectReference: {fileID: 0}
     - target: {fileID: 7822648399687063029, guid: a83fd3a565d8a454c9a01b8982198eb7, type: 3}
       propertyPath: m_LocalPosition.z

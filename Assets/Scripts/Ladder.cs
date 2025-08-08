@@ -15,10 +15,19 @@ public class Ladder : MonoBehaviour
 
     public void Update()
     {
+        if (playerMovement.isClimbing = true && Input.GetKeyDown(KeyCode.E))
+        {
+            // descendre de l'échelle
+            playerMovement.isClimbing = false;
+            collider.isTrigger = false;
+            Debug.Log("descente de l'échelle");
+            return;
+        }
+
         if (isInRange && Input.GetKeyDown(KeyCode.E))
         {
             playerMovement.isClimbing = true;
-            collider.isTrigger = true;      
+            collider.isTrigger = true;
         }
     }
 

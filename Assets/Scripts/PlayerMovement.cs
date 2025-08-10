@@ -3,11 +3,14 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
+    public float climbSpeed;
     public float jumpForce;
 
 
     private bool isJumping;
     private bool isGrounded;
+    
+    [HideInInspector]
     public bool isClimbing;
 
 
@@ -31,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.fixedDeltaTime;
 
         // Calculer vitesse de mouvement vertical
-        verticalMovement = Input.GetAxis("Vertical") * moveSpeed * Time.fixedDeltaTime;
+        verticalMovement = Input.GetAxis("Vertical") * climbSpeed * Time.fixedDeltaTime;
 
         // Est ce que ya une demande de saut
         if (Input.GetButtonDown("Jump") && isGrounded == true)
@@ -44,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         // envoie la vitesse horizontal
         float characterVelocity = Mathf.Abs(rb.linearVelocity.x);
         animator.SetFloat("Speed", rb.linearVelocity.x);
+        animator.SetBool("isClimbing", isClimbing);
     }
 
        
